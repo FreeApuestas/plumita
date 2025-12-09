@@ -1,0 +1,96 @@
+/* Estética minimalista estilo Apple */
+body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+}
+
+.container {
+  padding: 20px;
+  max-width: 450px;
+  margin: auto;
+}
+
+.titulo {
+  text-align: center;
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+}
+
+.pregunta {
+  font-size: 17px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.botones {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  flex-grow: 1;
+  margin-right: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #e5e5ea;
+  color: #000;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.btn:last-child {
+  margin-right: 0;
+}
+
+.btn.activo {
+  background: #34c759;
+  color: white;
+}
+
+.btn.activo-rojo {
+  background: #ff3b30;
+  color: white;
+}
+
+.resultado {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.seleccion {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+select {
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.resultado-mapeado {
+  margin-top: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
