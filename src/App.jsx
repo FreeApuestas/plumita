@@ -70,7 +70,7 @@ export default function App() {
       </div>
 
       <div className="resultado-mapeado">
-        Resultado mapeado: <strong>{obtenerValorMapeado()}</strong>
+        <strong>{obtenerValorMapeado()}</strong>
       </div>
     </div>
   );
