@@ -1,11 +1,12 @@
-import { useState } from "react";
-
-export default function PreguntaCard({ pregunta, puntos, onAnswer }) {
-  const [respuesta, setRespuesta] = useState(false);
-
-  const handleRespuesta = (valor) => {
-    setRespuesta(valor);
-    onAnswer(valor ? puntos : 0);
+export default function PreguntaCard({
+  pregunta,
+  puntos,
+  onAnswer,
+  respuestaActual
+}) {
+  const toggle = () => {
+    const nuevoValor = !respuestaActual; // true / false
+    onAnswer(nuevoValor); // enviamos BOOLEANO
   };
 
   return (
@@ -14,12 +15,11 @@ export default function PreguntaCard({ pregunta, puntos, onAnswer }) {
 
       <div className="botones">
         <button
-          className={`btn ${respuesta === true ? "activo" : ""}`}
-          onClick={() => handleRespuesta(!respuesta)}
+          className={`btn ${respuestaActual ? "activo" : ""}`}
+          onClick={toggle}
         >
           ✔ Cumple
         </button>
-
       </div>
     </div>
   );

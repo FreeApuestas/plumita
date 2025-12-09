@@ -1,32 +1,33 @@
 import { useState } from "react";
-import preguntas from "./data/preguntas";
-import PreguntaCard from "./components/PreguntaCard";
-
-const MAPEO_HOMBRE = [
-  { min: 0, max: 40, valor: "Macho" },
-  { min: 41, max: 60, valor: "Pierde aceite" },
-  { min: 61, max: 80, valor: "Bastante gay" },
-  { min: 81, max: 1000, valor: "Completamente homosexual" },
-];
-
-const MAPEO_MUJER = [
-  { min: 0, max: 40, valor: "Conduce camiones" },
-  { min: 41, max: 60, valor: "Machirula" },
-  { min: 61, max: 80, valor: "Mujer" },
-  { min: 81, max: 1000, valor: "Princesa absoluta" },
-];
+import preguntasRaw from "./data/preguntas";
+import DropdownGroup from "./components/DropdownGroup";
+import { MAPEO_HOMBRE, MAPEO_MUJER } from "./data/mapeos";
 
 export default function App() {
-  const [puntos, setPuntos] = useState(Array(preguntas.length).fill(null));
+  const [respuestas, setRespuestas] = useState(
+    Array(preguntasRaw.length).fill(null)
+  );
+
   const [genero, setGenero] = useState("hombre");
+  const [dropdownAbierto, setDropdownAbierto] = useState(null);
 
-  const total = puntos.reduce((acc, val) => acc + (val ?? 0), 0);
+  // Agrupar preguntas por puntos
+  const grupos = preguntasRaw.reduce((acc, item, indexReal) => {
+    if (!acc[item.puntos]) acc[item.puntos] = [];
+    acc[item.puntos].push({ ...item, indexReal });
+    return acc;
+  }, {});
 
-  const handleRespuesta = (index, valor) => {
-    const copia = [...puntos];
-    copia[index] = valor;
-    setPuntos(copia);
+  const handleRespuesta = (indexReal, valor) => {
+    const copia = [...respuestas];
+    copia[indexReal] = valor; // ahora es true/false
+    setRespuestas(copia);
   };
+
+  const total = preguntasRaw.reduce((acc, item, i) => {
+    if (respuestas[i]) return acc + item.puntos;
+    return acc;
+  }, 0);
 
   const obtenerValorMapeado = () => {
     const tabla = genero === "hombre" ? MAPEO_HOMBRE : MAPEO_MUJER;
@@ -37,14 +38,24 @@ export default function App() {
     <div className="container">
       <h1 className="titulo">Test</h1>
 
-      {preguntas.map((item, index) => (
-        <PreguntaCard
-          key={index}
-          pregunta={item.pregunta}
-          puntos={item.puntos}
-          onAnswer={(valor) => handleRespuesta(index, valor)}
-        />
-      ))}
+      {Object.keys(grupos)
+        .sort((a, b) => b - a)
+        .map((puntos) => (
+          <DropdownGroup
+            key={puntos}
+            puntos={Number(puntos)}
+            preguntas={grupos[puntos]}
+            onAnswer={handleRespuesta}
+            respuestas={respuestas}
+
+            isOpen={dropdownAbierto === Number(puntos)}
+            onToggle={() =>
+              setDropdownAbierto(
+                dropdownAbierto === Number(puntos) ? null : Number(puntos)
+              )
+            }
+          />
+        ))}
 
       <div className="resultado">
         <h2>Total: {total} puntos</h2>

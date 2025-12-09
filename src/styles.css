@@ -94,3 +94,127 @@ select {
   font-weight: 600;
   box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
+
+/* Dropdown estilo iOS */
+.dropdown {
+  margin-bottom: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+}
+
+.dropdown-header {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  background: #f2f2f7;
+}
+
+.dropdown-content {
+  padding: 10px 12px 18px;
+  background: white;
+}
+
+.dropdown-title {
+  color: #333;
+}
+
+.dropdown-arrow {
+  font-size: 16px;
+  color: #444;
+}
+
+/* ANIMACIÓN dropdown tipo iOS */
+.dropdown-animation-wrapper {
+  overflow: hidden;
+  transition: height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Extra suavidad en contenido */
+.dropdown-content {
+  padding: 12px 14px 18px;
+  background: white;
+}
+
+/* Animación de rebote (spring) */
+.btn.activo {
+  transform: scale(1.05);
+  animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1.0); }
+}
+
+/* Micro-desplazamiento del card al pulsar */
+.card:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease-out;
+}
+
+/* Fondo blur estilo iOS (efecto Glass) para los dropdowns */
+.dropdown-content {
+  backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 16px;
+}
+
+/* Sombra suave ascendente */
+.card {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-radius: 14px;
+}
+
+/* Rotación animada de flecha en dropdown */
+.dropdown-arrow {
+  display: inline-block;
+  transition: transform 0.35s ease;
+  transform-origin: center;
+}
+
+.dropdown-header.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Efecto “parpadeo suave” al aparecer el contenido */
+.dropdown-content {
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Divisor animado entre tarjetas */
+.card + .card {
+  border-top: 1px solid rgba(0,0,0,0.07);
+  animation: dividerReveal 0.4s ease-out;
+}
+
+@keyframes dividerReveal {
+  from { width: 0; opacity: 0; }
+  to   { width: 100%; opacity: 1; }
+}
+
+/* Botón activo con brillo suave tipo iOS */
+.btn.activo {
+  background: linear-gradient(135deg, #34d058, #28a745);
+  color: white;
+  box-shadow: 0 0 12px rgba(52, 208, 88, 0.45);
+}
+
+/* Animación de apertura de dropdown con “elasticidad” */
+.dropdown-animation-wrapper {
+  transition: height 0.45s cubic-bezier(0.25, 1.25, 0.5, 1);
+}
+
